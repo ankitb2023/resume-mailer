@@ -7,7 +7,7 @@ const templates = {
   default: `Hi {{person}},\n\nI hope you are doing well. I am writing to express my interest in the {{post}} role at {{company}}. Please find my resume attached.\n\nBest regards,\nAnkit Bhujeja`,
   friendly: `Hello {{person}},\n\nI came across the {{post}} opening at {{company}} and was excited to apply. I've attached my resume for your review.\n\nWarm regards,\nAnkit Bhujeja`
 };
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 export default function App() {
   const [formData, setFormData] = useState({
     person: '',
@@ -28,7 +28,7 @@ export default function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/mail/send', formData);
+      const response = await axios.post(`${API_BASE_URL}/api/mail/send`, formData);
       alert('Email sent successfully!');
     } catch (err) {
       console.error(err);
