@@ -14,7 +14,7 @@ export default function App() {
     company: '',
     post: '',
     email: '',
-    template: 'default'
+    template: 'cold_email'
   });
 
   const handleChange = (e) => {
@@ -45,8 +45,11 @@ export default function App() {
         <input name="post" placeholder="Post Name" onChange={handleChange} required />
         <input name="email" type="email" placeholder="Email ID" onChange={handleChange} required />
         <select name="template" onChange={handleChange}>
-          <option value="default">Default Template</option>
-          <option value="friendly">Friendly Template</option>
+          <option value="linkedin_post">Recently Linkedin Post</option>
+          <option value="cold_email">Cold Email Template</option>
+          <option value="referral_request">Referral Request Template</option>
+          <option value="recruiter_outreach">Recruiter Outreach Template</option>
+          <option value="follow_up">Follow up on Job Board Applied Template</option>
         </select>
         <button type="submit">Send Email</button>
       </form>
