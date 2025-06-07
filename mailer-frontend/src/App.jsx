@@ -39,7 +39,7 @@ export default function App() {
   return (
     <div className="container">
       <form onSubmit={handleSubmit} className="form">
-        <h1>Resume Mailer</h1>
+        <h1>HireNote</h1>
         <input name="person" placeholder="Person Name" onChange={handleChange} required />
         <input name="company" placeholder="Company Name" onChange={handleChange} required />
         <input name="post" placeholder="Post Name" onChange={handleChange} required />
