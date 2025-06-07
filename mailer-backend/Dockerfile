@@ -1,17 +1,13 @@
-# Use OpenJDK base image
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk-alpine
 
-# Set working directory inside the container
 WORKDIR /app
 
-# Copy all files from backend folder to /app
 COPY . .
 
-# Package the application
+RUN chmod +x ./mvnw
+
 RUN ./mvnw clean package -DskipTests
 
-# Expose port (default for Spring Boot)
 EXPOSE 8080
 
-# Run the application
-CMD ["java", "-jar", "target/*.jar"]
+CMD ["java", "-jar", "target/resumemailer-0.0.1-SNAPSHOT.jar"]
