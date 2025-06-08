@@ -44,10 +44,10 @@ export default function App() {
     <div className="container">
       <form onSubmit={handleSubmit} className="form">
         <h1>HireNote</h1>
-        <input name="person" placeholder="Person Name" onChange={handleChange} required />
-        <input name="company" placeholder="Company Name" onChange={handleChange} required />
-        <input name="post" placeholder="Post Name" onChange={handleChange} required />
-        <input name="email" type="email" placeholder="Email ID" onChange={handleChange} required />
+        <input name="person" placeholder="Person Name" value={formData.person} onChange={handleChange} required />
+        <input name="company" placeholder="Company Name" value={formData.company} onChange={handleChange} required />
+        <input name="post" placeholder="Post Name" value={formData.post} onChange={handleChange} required />
+        <input name="email" type="email" placeholder="Email ID" value={formData.email} onChange={handleChange} required />
         <select name="template" value={formData.template} onChange={handleChange}>
           <option value="linkedin_post">Recently Linkedin Post</option>
           <option value="cold_email">Cold Email Template</option>
