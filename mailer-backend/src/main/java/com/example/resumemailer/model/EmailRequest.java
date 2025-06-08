@@ -1,5 +1,7 @@
 package com.example.resumemailer.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class EmailRequest {
     private String person;
     private String company;
@@ -20,6 +22,7 @@ public class EmailRequest {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
+    @JsonProperty("template")
     public String getTemplateKey() { return templateKey; }
     public void setTemplateKey(String templateKey) { this.templateKey = templateKey; }
 }

@@ -75,6 +75,7 @@ public class EmailService {
 
     public void sendEmailWithAttachment(EmailRequest request) throws Exception {
         String body = templates.getOrDefault(request.getTemplateKey(), templates.get("cold_email"));
+        System.out.println(request.getTemplateKey());
         body = body.replace("{{person}}", request.getPerson())
                 .replace("{{post}}", request.getPost())
                 .replace("{{company}}", request.getCompany());
