@@ -9,13 +9,15 @@ const templates = {
 };
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 export default function App() {
-  const [formData, setFormData] = useState({
+   const defaultState = {
     person: '',
     company: '',
     post: '',
     email: '',
     template: 'cold_email'
-  });
+  }
+  const [isSubmitting,setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState(defaultState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,12 +29,16 @@ export default function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/api/mail/send`, formData);
       alert('Email sent successfully!');
+      setFormData(defaultState);
     } catch (err) {
       console.error(err);
       alert('Failed to send email.');
+    } finally{
+      setIsSubmitting(false);
     }
   };
 
@@ -44,14 +50,14 @@ export default function App() {
         <input name="company" placeholder="Company Name" onChange={handleChange} required />
         <input name="post" placeholder="Post Name" onChange={handleChange} required />
         <input name="email" type="email" placeholder="Email ID" onChange={handleChange} required />
-        <select name="template" onChange={handleChange}>
+        <select name="template" value={formData.template} onChange={handleChange}>
           <option value="linkedin_post">Recently Linkedin Post</option>
           <option value="cold_email">Cold Email Template</option>
           <option value="referral_request">Referral Request Template</option>
           <option value="recruiter_outreach">Recruiter Outreach Template</option>
           <option value="follow_up">Follow up on Job Board Applied Template</option>
         </select>
-        <button type="submit">Send Email</button>
+        <button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Sending...' : 'Send Email'}</button>
       </form>
     </div>
   );
