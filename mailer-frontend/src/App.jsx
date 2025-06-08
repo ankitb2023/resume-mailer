@@ -1,12 +1,10 @@
 // src/App.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
-import './App.css'; // Import your CSS file
+import './App.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const templates = {
-  default: `Hi {{person}},\n\nI hope you are doing well. I am writing to express my interest in the {{post}} role at {{company}}. Please find my resume attached.\n\nBest regards,\nAnkit Bhujeja`,
-  friendly: `Hello {{person}},\n\nI came across the {{post}} opening at {{company}} and was excited to apply. I've attached my resume for your review.\n\nWarm regards,\nAnkit Bhujeja`
-};
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 export default function App() {
    const defaultState = {
@@ -32,17 +30,17 @@ export default function App() {
     setIsSubmitting(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/api/mail/send`, formData);
-      alert('Email sent successfully!');
+      toast.success('Email sent successfully!');
       setFormData(defaultState);
     } catch (err) {
       console.error(err);
-      alert('Failed to send email.');
+      toast.error('Failed to send email.');
     } finally{
       setIsSubmitting(false);
     }
   };
 
-  return (
+  return (<>
     <div className="container">
       <form onSubmit={handleSubmit} className="form">
         <h1>HireNote</h1>
@@ -60,5 +58,7 @@ export default function App() {
         <button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Sending...' : 'Send Email'}</button>
       </form>
     </div>
+  <ToastContainer position="top-right" />
+    </>
   );
 }
