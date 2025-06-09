@@ -40,6 +40,18 @@ export default function App() {
     }
   };
 
+   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const mailto = params.get("mailto");
+
+    if (mailto && mailto.startsWith("mailto:")) {
+      const email = mailto.replace("mailto:", "").trim();
+      setFormData((prev) => ({
+        ...prev,
+        email,
+      }));
+    }
+  }, []);
   return (<>
     <div className="container">
       <form onSubmit={handleSubmit} className="form">

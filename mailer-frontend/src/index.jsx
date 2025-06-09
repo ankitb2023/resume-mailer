@@ -24,5 +24,12 @@ if ('serviceWorker' in navigator) {
       .catch(err => {
         console.error('Service worker registration failed:', err);
       });
+      if ('registerProtocolHandler' in navigator) {
+        navigator.registerProtocolHandler(
+          'mailto',
+          `${window.location.origin}/?email=%s`,
+          'Resume Mailer'
+        );
+      }
   });
 }
